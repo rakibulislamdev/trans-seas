@@ -1,10 +1,11 @@
 "use client";
 
 import { Bell, Search } from "lucide-react";
+import { Button } from "../ui/button";
 
 export function DashboardHeader() {
   return (
-    <div className="w-full bg-[#0071BD0D] py-4 px-6">
+    <div className="w-full bg-brand-primary/5 py-4 px-6">
       <div className="w-full mx-auto flex justify-between items-center gap-4">
         {/* Search Bar */}
         <div className="flex-1 max-w-sm">
@@ -19,9 +20,9 @@ export function DashboardHeader() {
         </div>
 
         {/* Notification Button */}
-        <button className="flex items-center justify-center cursor-pointer h-12 w-12 rounded-full bg-[#0071BD] hover:bg-[#0061a3] transition-colors">
-          <Bell className="h-5 w-5 text-white" />
-        </button>
+        <Button className="flex items-center justify-center cursor-pointer h-12 w-12 rounded-full bg-brand-primary hover:bg-[#0061a3] transition-colors">
+          <Bell size={24} className="text-text-strong-white" />
+        </Button>
       </div>
     </div>
   );

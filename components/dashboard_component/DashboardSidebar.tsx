@@ -75,9 +75,9 @@ export function DashboardSidebar() {
             <Image
               src="/images/dashboard-images/logo/Transseas_Logo_dashboard.png"
               alt="Trans Seas Logo"
-              width={140}
-              height={50}
-              className="w-auto h-16"
+              width={100}
+              height={100}
+              className="w-32.75 h-h-26"
             />
           </Link>
         )}
@@ -112,7 +112,7 @@ export function DashboardSidebar() {
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
-                    "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 border",
+                    "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 border",
                     isActive
                       ? "bg-[#0070C0] text-white border-[#0070C0] shadow-md"
                       : "bg-white text-slate-600 border-[#0070C0]/20 hover:border-[#0070C0] hover:text-[#0070C0]",
@@ -121,7 +121,7 @@ export function DashboardSidebar() {
                 >
                   <Icon
                     className={cn(
-                      "h-5 w-5 flex-shrink-0",
+                      "h-5 w-5 shrink-0",
                       isActive ? "text-white" : "text-[#0070C0]"
                     )}
                   />

@@ -1,5 +1,3 @@
-"use client";
-
 import { DashboardHeader } from "@/components/dashboard_component/DashboardHeader";
 import { DashboardSidebar } from "@/components/dashboard_component/DashboardSidebar";
 import type React from "react";
