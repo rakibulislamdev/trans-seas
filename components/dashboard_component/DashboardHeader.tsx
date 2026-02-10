@@ -1,58 +1,28 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { Bell, Search } from "lucide-react";
 
 export function DashboardHeader() {
-
   return (
-    <header className="sticky top-0 z-30 border-b border-gray-200 bg-white/80 backdrop-blur-md">
-      <div className="px-4 sm:px-6 lg:px-8 py-7">
-        <div className="flex items-center justify-between gap-4">
-          {/* Left side - Can add breadcrumbs or title here */}
-          <div className="flex-1">
-            <h1 className="text-xl sm:text-xl font-bold text-gray-900">
-              Admin Dashboard
-            </h1>
-          </div>
-
-          {/* Right side - User info */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            {/* User details - hidden on mobile */}
-            <div className="hidden sm:block text-right">
-         
-                <div className="space-y-2">
-                  <div className="h-4 w-24 bg-gray-200 rounded animate-pulse" />
-                  <div className="h-3 w-16 bg-gray-200 rounded animate-pulse" />
-                </div>
-          
-                <>
-                  <p className="text-sm font-semibold text-gray-900 leading-tight">
-                    Loading...
-                  </p>
-                  <p className="text-xs font-medium text-gray-500 capitalize">
-                    Fetching user data
-                  </p>
-                </>
-          
-            </div>
-
-            {/* Avatar */}
-            <Avatar className="h-9 w-9 sm:h-10 sm:w-10 ring-2 ring-[#314B79] ring-offset-2 transition-transform hover:scale-105">
-              <AvatarImage
-                src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001877.png"
-                alt="admin-profile"
-                className="object-cover"
-                width={200}
-                height={200}
-              />
-              <AvatarFallback className="bg-linear-to-br from-[#314B79] to-[#4A6FA5] text-white font-semibold text-sm sm:text-base">
-              Alok Roy
-              </AvatarFallback>
-            </Avatar>
+    <div className="w-full bg-[#0071BD0D] py-4 px-6">
+      <div className="w-full mx-auto flex justify-between items-center gap-4">
+        {/* Search Bar */}
+        <div className="flex-1 max-w-sm">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full pl-12 pr-4 py-3 rounded-full bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0071BD] focus:border-transparent transition-all"
+            />
           </div>
         </div>
+
+        {/* Notification Button */}
+        <button className="flex items-center justify-center cursor-pointer h-12 w-12 rounded-full bg-[#0071BD] hover:bg-[#0061a3] transition-colors">
+          <Bell className="h-5 w-5 text-white" />
+        </button>
       </div>
-    </header>
+    </div>
   );
 }
