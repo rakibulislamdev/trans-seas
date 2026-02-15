@@ -10,7 +10,7 @@ export default function Stats({ stat }: { stat: StatCard }) {
                 <span className="text-display font-semibold text-text-strong leading-none">{stat.value}</span>
             </div>
             <div className="bg-brand-primary p-2.5 rounded-xl text-text-strong-white">
-                {React.cloneElement(stat.icon as React.ReactElement, { size: 22 })}
+                {React.cloneElement(stat.icon as React.ReactElement)}
             </div>
         </div>
     )

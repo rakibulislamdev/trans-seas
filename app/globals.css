@@ -16,12 +16,12 @@
   /* 1.5rem = 24px */
   /* 2.5rem = 40px */
 
-  --font-size-display: 2.5rem;
+  --font-size-40: 2.5rem;
   --font-size-h2: 1.75rem;
-  --font-size-h1: 1.5rem;
+  --font-size-24: 1.5rem;
   --font-size-14: 14px;
-  --font-size-body: 1rem;
-  --font-size-tiny: 0.6875rem;
+  --font-size-16: 1rem;
+  --font-size-11: 0.6875rem;
 
   /* Custom Colors */
   --color-text-strong: var(--text-strong);
@@ -145,23 +145,23 @@
 @layer utilities {
 
   /* Font Sizes */
-  .text-display {
-    font-size: var(--font-size-display);
+  .text-40 {
+    font-size: var(--font-size-40);
   }
 
-  .text-h1 {
-    font-size: var(--font-size-h1);
+  .text-24 {
+    font-size: var(--font-size-24);
   }
 
   .text-14 {
     font-size: var(--font-size-14);
   }
 
-  .text-body {
-    font-size: var(--font-size-body);
+  .text-16 {
+    font-size: var(--font-size-16);
   }
 
-  .text-tiny {
-    font-size: var(--font-size-tiny);
+  .text-11 {
+    font-size: var(--font-size-11);
   }
 }
