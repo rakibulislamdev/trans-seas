@@ -19,7 +19,6 @@ import Link from "next/link";
 const forgotPasswordSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }),
 });
-
 type ForgotPasswordValues = z.infer<typeof forgotPasswordSchema>;
 
 export default function ForgotPasswordForm() {
