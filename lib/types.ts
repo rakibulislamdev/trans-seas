@@ -10,3 +10,20 @@ export interface Quote {
   validUntil: string;
   hasAlert: boolean;
 }
+
+// --- project types ---
+export type ProjectStatus = "active" | "draft" | "all";
+
+export interface IProject {
+  id: string;
+  title: string;
+  projectCode: string;
+  clientName: string;
+  location: string;
+  itemCount: number;
+  rfqCount: number;
+  totalAmount: number;
+  status: ProjectStatus;
+}
+
+// --- project types ---
