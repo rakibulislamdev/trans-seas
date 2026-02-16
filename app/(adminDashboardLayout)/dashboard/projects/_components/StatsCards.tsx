@@ -17,7 +17,7 @@ export const StatsCards = () => {
                         <h3 className="text-xl md:text-4xl font-bold text-gray-800">{item.value}</h3>
                     </div>
                     <div className={`${item.color} p-1.5 md:p-2.5 rounded-lg text-white shrink-0`}>
-                        <item.icon className="w-4 h-4 md:w-[22px] md:h-[22px]" />
+                        <item.icon className="w-4 h-4 md:w-5.5 md:h-5.5" />
                     </div>
                 </div>
             ))}

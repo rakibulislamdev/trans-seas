@@ -40,7 +40,7 @@ export const DocumentSection = () => {
                 <h4 className="font-bold text-gray-700 text-sm md:text-base mb-1">
                     Drop files here or click to upload
                 </h4>
-                <p className="text-[10px] md:text-xs text-gray-400 max-w-[200px] md:max-w-none">
+                <p className="text-[10px] md:text-xs text-gray-400 max-w-50 md:max-w-none">
                     Supports PDF spec sheets and Excel BOQ files
                 </p>
             </div>
@@ -65,7 +65,7 @@ export const DocumentSection = () => {
                                         extracted
                                     </span>
                                 </div>
-                                <p className="text-[10px] md:text-[11px] text-gray-400 mt-1 font-medium">
+                                <p className="text-[10px] md:text-11 text-gray-400 mt-1 font-medium">
                                     {file.meta}
                                 </p>
                             </div>

@@ -58,7 +58,7 @@ export default function ProjectDetailsPage() {
                                 >
                                     <tab.icon
                                         size={18}
-                                        className={`${isActive ? 'text-[#0073BE]' : 'text-gray-400'} w-4 h-4 md:w-[18px] md:h-[18px]`}
+                                        className={`${isActive ? 'text-[#0073BE]' : 'text-gray-400'} w-4 h-4 md:w-4.5 md:h-4.5`}
                                     />
                                     {tab.label}
                                 </button>
