@@ -18,6 +18,7 @@ import {
   ShoppingCart,
   ReceiptText,
   CreditCard,
+  Settings,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -64,6 +65,7 @@ export function DashboardSidebar() {
     { title: "Purchase Orders", icon: ShoppingCart, href: "/dashboard/orders" },
     { title: "Invoices", icon: ReceiptText, href: "/dashboard/invoices" },
     { title: "Payments", icon: CreditCard, href: "/dashboard/payments" },
+    { title: "Settings", icon: Settings, href: "/dashboard/settings" },
   ];
 
   const sidebarContent = (

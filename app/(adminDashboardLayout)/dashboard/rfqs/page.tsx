@@ -3,10 +3,6 @@
 import { useState } from 'react';
 import {
   Search,
-  Building2,
-  BarChart3,
-  Package,
-  Calendar,
   Plus,
   CheckCircle2,
   UserCircle,
@@ -14,12 +10,22 @@ import {
   ChevronDown
 } from 'lucide-react';
 import CreateRFQModal from './_components/CreateRFQModal';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 
 const RFQList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState('All');
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const router = useRouter();
 
   const rfqs = [
     {
@@ -65,140 +71,125 @@ const RFQList = () => {
     }
   ];
 
-  const getStatusButton = (status, overdue, overdueDays) => {
-    if (status === 'Responded') {
-      return (
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-emerald-200 bg-emerald-50 text-emerald-700 text-sm font-medium hover:bg-emerald-100 transition-colors">
-          <CheckCircle2 className="w-4 h-4" />
-          Responded
-        </button>
-      );
-    } else if (status === 'Follow-Up') {
-      return (
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors">
-          <UserCircle className="w-4 h-4" />
-          Follow-Up
-        </button>
-      );
-    } else if (status === 'Sent') {
-      return (
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-amber-200 bg-amber-50 text-amber-700 text-sm font-medium hover:bg-amber-100 transition-colors">
-          <Send className="w-4 h-4" />
-          Sent
-        </button>
-      );
+  const getStatusBadge = (status) => {
+    switch (status) {
+      case 'Responded':
+        return (
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-100">
+            <CheckCircle2 className="w-3.5 h-3.5" />
+            Responded
+          </div>
+        );
+      case 'Follow-Up':
+        return (
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-100">
+            <UserCircle className="w-3.5 h-3.5" />
+            Follow-Up
+          </div>
+        );
+      case 'Sent':
+        return (
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-bold border border-amber-100">
+            <Send className="w-3.5 h-3.5" />
+            Sent
+          </div>
+        );
+      default:
+        return null;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-gray-50/50 p-4 sm:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">RFQs</h1>
-            <p className="text-gray-600 mt-1">{rfqs.length} total requests</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">RFQs</h1>
+            <p className="text-gray-500 text-sm mt-1 font-medium">{rfqs.length} total requests in database</p>
           </div>
-          <button
+          <Button
             onClick={() => setIsCreateModalOpen(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold h-11 px-6 rounded-xl transition-all shadow-md active:scale-95"
           >
-            <Plus className="w-5 h-5" />
-            Create RFQ
-          </button>
+            <Plus className="w-5 h-5 mr-2" />
+            Create New RFQ
+          </Button>
         </div>
 
         {/* Search and Filter */}
-        <div className="flex gap-4 mb-6">
+        <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="flex-1 relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search by ID, hotel or supplier..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full h-12 pl-12 pr-4 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium text-gray-900"
             />
           </div>
-          <div className="relative">
+          <div className="relative min-w-[200px]">
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="appearance-none px-6 py-3 pr-12 border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent cursor-pointer"
+              className="w-full h-12 appearance-none px-6 pr-12 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer font-bold text-gray-700"
             >
-              <option>All</option>
-              <option>Response</option>
-              <option>Awaiting Response</option>
-              <option>Overdue</option>
+              <option>All Status</option>
+              <option>Responded</option>
+              <option>Follow-Up</option>
+              <option>Sent</option>
             </select>
             <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
           </div>
         </div>
 
-        {/* RFQ List */}
-
-        <div className="space-y-4">
-          {rfqs.map((rfq) => (
-            <Link key={rfq.id} href={`/dashboard/rfqs/${rfq.id}`} className="block">
-              <div
-                className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-8 flex-1">
-                    {/* RFQ ID and Hotel */}
-                    <div className="flex items-center gap-4 min-w-[200px]">
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <h3 className="text-lg font-semibold text-gray-900">
-                            {rfq.id}
-                          </h3>
-                          {rfq.overdue && (
-                            <span className="px-2 py-0.5 bg-red-500 text-white text-xs font-medium rounded">
-                              {rfq.overdueDays}d overdue
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 text-gray-600 text-sm">
-                          <Building2 className="w-4 h-4" />
-                          <span>{rfq.hotel}</span>
-                        </div>
-                      </div>
+        {/* RFQ Table */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <Table>
+            <TableHeader className="bg-gray-50/50">
+              <TableRow className="hover:bg-transparent border-gray-100">
+                <TableHead className="w-[180px] font-bold text-gray-600 h-14 px-6 uppercase text-[11px] tracking-wider">RFQ ID</TableHead>
+                <TableHead className="font-bold text-gray-600 px-6 uppercase text-[11px] tracking-wider">Hotel / Project</TableHead>
+                <TableHead className="font-bold text-gray-600 px-6 uppercase text-[11px] tracking-wider">Supplier</TableHead>
+                <TableHead className="font-bold text-gray-600 px-6 uppercase text-[11px] tracking-wider text-center">Items</TableHead>
+                <TableHead className="font-bold text-gray-600 px-6 uppercase text-[11px] tracking-wider text-center">Due Date</TableHead>
+                <TableHead className="font-bold text-gray-600 px-6 uppercase text-[11px] tracking-wider text-center">Sent Date</TableHead>
+                <TableHead className="font-bold text-gray-600 px-6 uppercase text-[11px] tracking-wider text-right">Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {rfqs.map((rfq) => (
+                <TableRow
+                  key={rfq.id}
+                  className="cursor-pointer border-gray-50 hover:bg-gray-50/50 transition-colors group"
+                  onClick={() => router.push(`/dashboard/rfqs/${rfq.id}`)}
+                >
+                  <TableCell className="px-6 py-4 font-bold text-blue-600">
+                    <div className="flex items-center gap-2">
+                      {rfq.id}
+                      {rfq.overdue && (
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-red-100 text-[10px] font-bold text-red-600 uppercase">
+                          {rfq.overdueDays}d overdue
+                        </span>
+                      )}
                     </div>
-
-                    {/* Supplier */}
-                    <div className="flex items-center gap-2 text-gray-700 min-w-[200px]">
-                      <BarChart3 className="w-4 h-4" />
-                      <span className="text-sm">{rfq.supplier}</span>
+                  </TableCell>
+                  <TableCell className="px-6 py-4 font-medium text-gray-900">{rfq.hotel}</TableCell>
+                  <TableCell className="px-6 py-4 font-medium text-gray-700">{rfq.supplier}</TableCell>
+                  <TableCell className="px-6 py-4 text-center font-bold text-gray-600">{rfq.items}</TableCell>
+                  <TableCell className="px-6 py-4 text-center font-medium text-gray-600">{rfq.dueDate}</TableCell>
+                  <TableCell className="px-6 py-4 text-center text-sm text-gray-500">{rfq.sentDate}</TableCell>
+                  <TableCell className="px-6 py-4">
+                    <div className="flex justify-end">
+                      {getStatusBadge(rfq.status)}
                     </div>
-
-                    {/* Items */}
-                    <div className="flex items-center gap-2 text-gray-700 min-w-[100px]">
-                      <Package className="w-4 h-4" />
-                      <span className="text-sm">{rfq.items} item</span>
-                    </div>
-
-                    {/* Due Date */}
-                    <div className="flex items-center gap-2 text-gray-700 min-w-[120px]">
-                      <Calendar className="w-4 h-4" />
-                      <span className="text-sm">Due {rfq.dueDate}</span>
-                    </div>
-
-                    {/* Sent Date */}
-                    <div className="text-gray-600 text-sm min-w-[100px]">
-                      Sent {rfq.sentDate}
-                    </div>
-                  </div>
-
-                  {/* Status Button */}
-                  <div>
-                    {getStatusButton(rfq.status, rfq.overdue, rfq.overdueDays)}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
-
       </div>
 
       <CreateRFQModal
