@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { IProject } from "@/lib/types";
+import { toast } from "sonner";
 
 // Form Validation Schema
 const formSchema = z.object({
@@ -47,6 +48,7 @@ export const ProjectForm = ({ onSuccess, initialData }: ProjectFormProps) => {
     function onSubmit(values: ProjectFormValues) {
         console.log(values);
         // API Call ekhane hobe
+        toast.success(`Project ${initialData ? "updated" : "created"} successfully`);
         onSuccess();
     }
 
@@ -143,7 +145,7 @@ export const ProjectForm = ({ onSuccess, initialData }: ProjectFormProps) => {
                         type="submit"
                         className="h-11 px-6 rounded-xl bg-[#0073BE] hover:bg-[#005fa0] font-bold text-white flex items-center gap-2"
                     >
-                        New Project <ArrowRight size={18} />
+                        {initialData ? "Update Project" : "Create Project"} <ArrowRight size={18} />
                     </Button>
                 </div>
             </form>

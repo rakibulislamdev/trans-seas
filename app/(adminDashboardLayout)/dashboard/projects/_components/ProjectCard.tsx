@@ -22,7 +22,7 @@ export const ProjectCard = ({ project }: { project: IProject }) => {
             <Link href={`/dashboard/projects/${project.id}`}>
                 <Card className="rounded-2xl border border-[rgb(0,115,190)]/20 shadow-[0px_4px_8px_0px_rgba(0,115,190,0.2)] hover:shadow-md transition-all group cursor-pointer">
                     <CardHeader className="flex flex-row items-start justify-between space-y-0 p-4 pb-2">
-                        <Badge className={`${project.status === "active" ? "bg-green-50 text-green-600 border-green-100 hover:bg-green-100" : "bg-yellow-50 text-yellow-600 border-yellow-100 hover:bg-yellow-100 "} uppercase text-[10px] font-bold px-3`}>
+                        <Badge className={`${project.status === "completed" ? "bg-green-50 text-green-600 border-green-100 hover:bg-green-100" : "bg-blue-50 text-blue-600 border-blue-100 hover:bg-blue-100 "} uppercase text-[10px] font-bold px-3`}>
                             {project.status}
                         </Badge>
                         <button

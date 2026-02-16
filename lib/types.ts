@@ -12,7 +12,7 @@ export interface Quote {
 }
 
 // --- project types ---
-export type ProjectStatus = "active" | "draft" | "all";
+export type ProjectStatus = "active" | "completed" | "all";
 
 export interface IProject {
   id: string;
