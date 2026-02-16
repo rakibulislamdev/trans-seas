@@ -19,7 +19,9 @@ export interface IProject {
   title: string;
   projectCode: string;
   clientName: string;
+  clientEmail?: string;
   location: string;
+  currency?: string;
   itemCount: number;
   rfqCount: number;
   totalAmount: number;

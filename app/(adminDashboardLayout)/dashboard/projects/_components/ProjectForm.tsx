@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ArrowRight } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -15,6 +14,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { IProject } from "@/lib/types";
 
 // Form Validation Schema
 const formSchema = z.object({
@@ -29,7 +29,7 @@ type ProjectFormValues = z.infer<typeof formSchema>;
 
 interface ProjectFormProps {
     onSuccess: () => void;
-    initialData?: unknown;
+    initialData?: IProject;
 }
 
 export const ProjectForm = ({ onSuccess, initialData }: ProjectFormProps) => {
