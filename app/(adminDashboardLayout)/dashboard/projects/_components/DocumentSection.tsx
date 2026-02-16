@@ -58,7 +58,7 @@ export const DocumentSection = () => {
                             </div>
                             <div className="min-w-0 flex-1">
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <h5 className="font-bold text-gray-800 text-xs md:text-sm truncate max-w-[180px] md:max-w-[300px]">
+                                    <h5 className="font-bold text-gray-800 text-xs md:text-sm truncate max-w-45 md:max-w-75">
                                         {file.name}
                                     </h5>
                                     <span className="bg-green-100 text-green-600 text-[9px] md:text-[10px] font-black uppercase px-2 py-0.5 rounded-full border border-green-200">

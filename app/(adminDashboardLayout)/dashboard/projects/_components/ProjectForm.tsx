@@ -27,15 +27,20 @@ const formSchema = z.object({
 
 type ProjectFormValues = z.infer<typeof formSchema>;
 
-export const ProjectForm = ({ onSuccess }: { onSuccess: () => void }) => {
+interface ProjectFormProps {
+    onSuccess: () => void;
+    initialData?: unknown;
+}
+
+export const ProjectForm = ({ onSuccess, initialData }: ProjectFormProps) => {
     const form = useForm<ProjectFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            projectName: "",
-            clientName: "",
-            location: "",
-            clientEmail: "",
-            currency: "USD",
+            projectName: initialData?.title || "",
+            clientName: initialData?.clientName || "",
+            location: initialData?.location || "",
+            clientEmail: initialData?.clientEmail || "",
+            currency: initialData?.currency || "USD",
         },
     });
 
