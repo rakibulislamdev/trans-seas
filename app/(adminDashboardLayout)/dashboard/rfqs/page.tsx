@@ -71,7 +71,7 @@ const RFQList = () => {
     }
   ];
 
-  const getStatusBadge = (status) => {
+  const getStatusBadge = (status: string) => {
     switch (status) {
       case 'Responded':
         return (
