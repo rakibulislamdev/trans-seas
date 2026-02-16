@@ -5,6 +5,7 @@ import { FileText, Package, Send, DollarSign, Files } from 'lucide-react';
 import { ProjectDetailsHeader } from '../_components/ProjectDetailsHeader';
 import { StatsCards } from '../_components/StatsCards';
 import { DocumentSection } from '../_components/DocumentSection';
+import { ExtractedItemsTable } from '../_components/ExtractedItemsTable';
 
 export default function ProjectDetailsPage() {
     const [activeTab, setActiveTab] = useState('docs');
@@ -15,7 +16,7 @@ export default function ProjectDetailsPage() {
             case 'docs':
                 return <DocumentSection />;
             case 'items':
-                return <div className="p-10 text-center text-gray-400 bg-white rounded-2xl border border-dashed border-gray-200">Items Content Coming Soon...</div>;
+                return <ExtractedItemsTable />
             case 'rfq':
                 return <div className="p-10 text-center text-gray-400 bg-white rounded-2xl border border-dashed border-gray-200">RFQ&#39;s Management Section</div>;
             case 'quotes':

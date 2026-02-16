@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ArrowRight } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -15,6 +14,8 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { IProject } from "@/lib/types";
+import { toast } from "sonner";
 
 // Form Validation Schema
 const formSchema = z.object({
@@ -29,7 +30,7 @@ type ProjectFormValues = z.infer<typeof formSchema>;
 
 interface ProjectFormProps {
     onSuccess: () => void;
-    initialData?: unknown;
+    initialData?: IProject;
 }
 
 export const ProjectForm = ({ onSuccess, initialData }: ProjectFormProps) => {
@@ -47,6 +48,7 @@ export const ProjectForm = ({ onSuccess, initialData }: ProjectFormProps) => {
     function onSubmit(values: ProjectFormValues) {
         console.log(values);
         // API Call ekhane hobe
+        toast.success(`Project ${initialData ? "updated" : "created"} successfully`);
         onSuccess();
     }
 
@@ -143,7 +145,7 @@ export const ProjectForm = ({ onSuccess, initialData }: ProjectFormProps) => {
                         type="submit"
                         className="h-11 px-6 rounded-xl bg-[#0073BE] hover:bg-[#005fa0] font-bold text-white flex items-center gap-2"
                     >
-                        New Project <ArrowRight size={18} />
+                        {initialData ? "Update Project" : "Create Project"} <ArrowRight size={18} />
                     </Button>
                 </div>
             </form>

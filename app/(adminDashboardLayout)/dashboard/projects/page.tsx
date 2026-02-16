@@ -5,7 +5,7 @@ import { ProjectCard } from './_components/ProjectCard';
 
 const allProjects: IProject[] = [
   { id: '1', title: 'Marina Bay Hotel', projectCode: 'PRJ-2026-0001', clientName: 'Marina Bay Hotel & Restaurant', location: 'Dubai, Marina', itemCount: 6, rfqCount: 9, totalAmount: 850000, status: 'active' },
-  { id: '2', title: 'Palm Jumeirah Resort', projectCode: 'PRJ-2026-0002', clientName: 'Palm Hospitality Group', location: 'Dubai, Palm Jumeirah', itemCount: 12, rfqCount: 15, totalAmount: 1200000, status: 'draft' }
+  { id: '2', title: 'Palm Jumeirah Resort', projectCode: 'PRJ-2026-0002', clientName: 'Palm Hospitality Group', location: 'Dubai, Palm Jumeirah', itemCount: 12, rfqCount: 15, totalAmount: 1200000, status: 'completed' }
 ];
 
 async function getProjects(query: string, status: string): Promise<IProject[]> {

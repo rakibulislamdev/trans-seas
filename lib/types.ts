@@ -12,14 +12,16 @@ export interface Quote {
 }
 
 // --- project types ---
-export type ProjectStatus = "active" | "draft" | "all";
+export type ProjectStatus = "active" | "completed" | "all";
 
 export interface IProject {
   id: string;
   title: string;
   projectCode: string;
   clientName: string;
+  clientEmail?: string;
   location: string;
+  currency?: string;
   itemCount: number;
   rfqCount: number;
   totalAmount: number;
