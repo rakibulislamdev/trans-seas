@@ -5,7 +5,7 @@ import type React from "react";
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   return (
     <div className="flex h-screen  overflow-hidden">
