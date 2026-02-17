@@ -6,6 +6,7 @@ import { ProjectDetailsHeader } from '../_components/ProjectDetailsHeader';
 import { StatsCards } from '../_components/StatsCards';
 import { DocumentSection } from '../_components/DocumentSection';
 import { ExtractedItemsTable } from '../_components/ExtractedItemsTable';
+import { RFQItemSection } from '../_components/RFQItemSection';
 
 export default function ProjectDetailsPage() {
     const [activeTab, setActiveTab] = useState('docs');
@@ -18,7 +19,7 @@ export default function ProjectDetailsPage() {
             case 'items':
                 return <ExtractedItemsTable />
             case 'rfq':
-                return <div className="p-10 text-center text-gray-400 bg-white rounded-2xl border border-dashed border-gray-200">RFQ&#39;s Management Section</div>;
+                return <RFQItemSection />
             case 'quotes':
                 return <div className="p-10 text-center text-gray-400 bg-white rounded-2xl border border-dashed border-gray-200">Quotes Management Section</div>;
             case 'proposals':
@@ -67,6 +68,8 @@ export default function ProjectDetailsPage() {
                         })}
                     </div>
                 </div>
+
+
 
                 {/* Content Section - Based on Active Tab */}
                 <div className="transition-all duration-300">
