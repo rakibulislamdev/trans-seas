@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
 import { QuoteHeader } from './QuoteHeader';
 import { QuoteCard, QuoteData } from './QuoteCard';
 
-const MOCK_DATA: QuoteData[] = [
+const INITIAL_DATA: QuoteData[] = [
     {
         id: "PTC-Q-2024-154",
         hotelName: "Marina Bay Hotel",
@@ -42,15 +43,29 @@ const MOCK_DATA: QuoteData[] = [
 ];
 
 export default function ProjectQuotesContainer() {
-    const reviewCount = MOCK_DATA.filter(q => q.status === 'Needs Review').length;
+    const [quotes, setQuotes] = useState<QuoteData[]>(INITIAL_DATA);
+    const totalQuotes = quotes.length;
+    const reviewCount = quotes.filter(q => q.status === 'Needs Review').length;
+
+    const handleStatusUpdate = (id: string, newStatus: QuoteData['status']) => {
+        setQuotes(prevQuotes =>
+            prevQuotes.map(quote =>
+                quote.id === id ? { ...quote, status: newStatus } : quote
+            )
+        );
+    };
 
     return (
         <div className="min-h-screen">
-            <QuoteHeader totalQuotes={MOCK_DATA.length} reviewCount={reviewCount} />
+            <QuoteHeader totalQuotes={totalQuotes} reviewCount={reviewCount} />
 
             <div className="space-y-4">
-                {MOCK_DATA.map((quote) => (
-                    <QuoteCard key={quote.id} quote={quote} />
+                {quotes.map((quote) => (
+                    <QuoteCard
+                        key={quote.id}
+                        quote={quote}
+                        onStatusChange={(status) => handleStatusUpdate(quote.id, status)}
+                    />
                 ))}
             </div>
         </div>

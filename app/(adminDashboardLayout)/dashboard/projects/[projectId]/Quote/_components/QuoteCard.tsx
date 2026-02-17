@@ -1,7 +1,21 @@
+import React from 'react';
 import {
-    FileText, Package, Calendar, AlertTriangle,
-    Eye, CheckCircle, MoreHorizontal, LucideIcon
+    FileText,
+    Package,
+    Calendar,
+    AlertTriangle,
+    Eye,
+    CheckCircle,
+    MoreHorizontal
 } from 'lucide-react';
+
+// shadcn UI components (npx shadcn-ui@latest add dropdown-menu)
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export type QuoteStatus = 'Needs Review' | 'Parsed' | 'Approved';
 
@@ -19,68 +33,88 @@ export interface QuoteData {
     attentionRequired?: boolean;
 }
 
-const statusConfig: Record<QuoteStatus, { icon: LucideIcon; className: string }> = {
-    'Needs Review': { icon: Eye, className: 'border-amber-200 bg-amber-50 text-amber-700' },
-    'Approved': { icon: CheckCircle, className: 'border-emerald-200 bg-emerald-50 text-emerald-700' },
-    'Parsed': { icon: Package, className: 'bg-gray-100 text-gray-600 border-transparent' },
-};
+interface QuoteCardProps {
+    quote: QuoteData;
+    onStatusChange: (status: QuoteStatus) => void;
+}
 
-export const QuoteCard: React.FC<{ quote: QuoteData }> = ({ quote }) => {
-    const { icon: StatusIcon, className: statusClass } = statusConfig[quote.status];
-
+export const QuoteCard: React.FC<QuoteCardProps> = ({ quote, onStatusChange }) => {
     return (
-        <div className="bg-white border border-brand-primary/20 rounded-xl p-5 shadow-[0_10px_20px_rgba(0,113,189,0.1)] transition-shadow cursor-pointer">
+        <div className="bg-white border border-blue-100 rounded-xl p-5 shadow-[0_10px_20px_rgba(0,113,189,0.05)] transition-all hover:shadow-[0_10px_25px_rgba(0,113,189,0.1)]">
             <div className="flex justify-between items-start">
+
+                {/* Left Side: Information */}
                 <div className="space-y-3">
                     <h2 className="text-xl font-bold text-gray-800">{quote.id}</h2>
 
-                    {/* Info Grid */}
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-gray-500 text-sm">
                         <div className="flex items-center gap-2">
                             <FileText size={18} className="text-gray-400" />
                             <div>
-                                <p className="font-medium text-gray-700 leading-tight">{quote.hotelName}</p>
-                                <p className="text-11">{quote.projectCode}</p>
+                                <p className="font-semibold text-gray-700 leading-tight">{quote.hotelName}</p>
+                                <p className="text-11 font-medium text-gray-400">{quote.projectCode}</p>
                             </div>
                         </div>
 
                         <div className="flex items-center gap-2">
                             <Package size={18} className="text-gray-400" />
-                            <span className="text-gray-700">{quote.category}</span>
+                            <span className="text-gray-700 font-medium">{quote.category}</span>
                         </div>
 
-                        <div className="flex items-center gap-1">
-                            <span className="text-lg font-bold text-gray-900">{quote.currency}</span>
-                            <span className="font-bold text-gray-700">{quote.amount}</span>
+                        <div className="flex items-center gap-1 font-bold">
+                            <span className="text-lg text-gray-900">{quote.currency}</span>
+                            <span className="text-gray-700">{quote.amount}</span>
                         </div>
 
                         <div className="text-gray-700 font-medium">{quote.itemCount} Item</div>
 
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 font-medium">
                             <Calendar size={18} className="text-gray-400" />
-                            <span>{quote.date} <span className="mx-1 text-gray-300">|</span> valid until {quote.validUntil}</span>
+                            <span>{quote.date} <span className="text-gray-300 mx-1">|</span> valid until {quote.validUntil}</span>
                         </div>
                     </div>
 
                     {/* Attention Message */}
-                    {quote.attentionRequired && (
-                        <div className="flex items-center gap-2 text-amber-600 text-xs font-semibold mt-1">
+                    {quote.attentionRequired && quote.status === 'Needs Review' && (
+                        <div className="flex items-center gap-2 text-amber-600 text-xs font-bold mt-1">
                             <AlertTriangle size={14} />
                             <span>1 items need attention</span>
                         </div>
                     )}
                 </div>
 
-                {/* Dynamic Status Badge */}
-                <div className="flex items-center gap-1">
-                    <div className={`flex items-center gap-2 px-3 py-1.5 border rounded-lg ${statusClass}`}>
-                        <StatusIcon size={16} />
-                        <span className="text-sm font-medium">{quote.status}</span>
+                {/* Right Side: Status Badge & Dynamic Dropdown */}
+                <div className="flex items-center gap-2">
+                    {/* Inline Status Badge */}
+                    <div className={`flex items-center gap-2 px-3 py-1.5 border rounded-lg transition-all duration-300 font-semibold text-sm
+                        ${quote.status === 'Needs Review' ? 'border-amber-200 bg-amber-50 text-amber-700' : ''}
+                        ${quote.status === 'Approved' ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : ''}
+                        ${quote.status === 'Parsed' ? 'bg-gray-100 text-gray-600 border-transparent' : ''}
+                    `}>
+                        {quote.status === 'Needs Review' && <Eye size={16} />}
+                        {quote.status === 'Approved' && <CheckCircle size={16} />}
+                        {quote.status === 'Parsed' && <Package size={16} />}
+                        <span>{quote.status}</span>
                     </div>
+
+                    {/* Conditional Dropdown: Only visible if status is "Parsed" */}
                     {quote.status === 'Parsed' && (
-                        <button className="p-1.5 hover:bg-gray-200 rounded-full transition-colors">
-                            <MoreHorizontal size={18} className="text-gray-400" />
-                        </button>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <button className="p-1.5 hover:bg-gray-100 rounded-full outline-none group transition-colors">
+                                    <MoreHorizontal size={20} className="text-gray-400 group-hover:text-gray-600" />
+                                </button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-32 bg-white shadow-xl rounded-lg border border-gray-100 p-1">
+                                <DropdownMenuItem
+                                    onClick={() => onStatusChange('Approved')}
+                                    className="flex items-center gap-2 px-3 py-2 cursor-pointer focus:bg-emerald-50 focus:text-emerald-700 rounded-md transition-colors"
+                                >
+                                    <CheckCircle size={16} className="text-emerald-500" />
+                                    <span className="text-sm font-medium">Approve</span>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     )}
                 </div>
             </div>
