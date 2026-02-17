@@ -29,7 +29,7 @@ export const QuoteCard: React.FC<{ quote: QuoteData }> = ({ quote }) => {
     const { icon: StatusIcon, className: statusClass } = statusConfig[quote.status];
 
     return (
-        <div className="bg-white border border-blue-50 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white border border-brand-primary/20 rounded-xl p-5 shadow-[0_10px_20px_rgba(0,113,189,0.1)] transition-shadow cursor-pointer">
             <div className="flex justify-between items-start">
                 <div className="space-y-3">
                     <h2 className="text-xl font-bold text-gray-800">{quote.id}</h2>
