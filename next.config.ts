@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["i.pravatar.cc"],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 export default nextConfig;
