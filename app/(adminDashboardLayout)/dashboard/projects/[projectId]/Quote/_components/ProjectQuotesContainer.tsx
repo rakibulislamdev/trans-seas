@@ -1,6 +1,15 @@
+"use client";
+
 import React, { useState } from 'react';
 import { QuoteHeader } from './QuoteHeader';
 import { QuoteCard, QuoteData } from './QuoteCard';
+
+interface ProjectQuotesContainerProps {
+    params: {
+        projectId: string;
+    };
+}
+
 
 const INITIAL_DATA: QuoteData[] = [
     {
@@ -42,10 +51,22 @@ const INITIAL_DATA: QuoteData[] = [
     }
 ];
 
-export default function ProjectQuotesContainer() {
+export default function ProjectQuotesContainer({ params }: ProjectQuotesContainerProps) {
     const [quotes, setQuotes] = useState<QuoteData[]>(INITIAL_DATA);
+
+    if (!params || !params.projectId) {
+        return (
+            <div className="p-8 text-red-500 font-medium">
+                Error: Project ID not found. Please ensure this component is called correctly from the Page file.
+            </div>
+        );
+    }
+
+    const { projectId } = params;
+
     const totalQuotes = quotes.length;
     const reviewCount = quotes.filter(q => q.status === 'Needs Review').length;
+
 
     const handleStatusUpdate = (id: string, newStatus: QuoteData['status']) => {
         setQuotes(prevQuotes =>
@@ -56,7 +77,7 @@ export default function ProjectQuotesContainer() {
     };
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-transparent">
             <QuoteHeader totalQuotes={totalQuotes} reviewCount={reviewCount} />
 
             <div className="space-y-4">
@@ -64,6 +85,7 @@ export default function ProjectQuotesContainer() {
                     <QuoteCard
                         key={quote.id}
                         quote={quote}
+                        projectId={projectId}
                         onStatusChange={(status) => handleStatusUpdate(quote.id, status)}
                     />
                 ))}

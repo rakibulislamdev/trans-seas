@@ -130,7 +130,7 @@ export const ExtractedItemsTable = () => {
                                                     <span className="font-medium">Approve</span>
                                                 </DropdownMenuItem>
 
-                                                <div className="h-[1px] bg-blue-200/50 mx-1" />
+                                                <div className="h-px bg-blue-200/50 mx-1" />
 
                                                 {/* Edit Trigger */}
                                                 <DropdownMenuItem
@@ -141,7 +141,7 @@ export const ExtractedItemsTable = () => {
                                                     <span className="font-medium">Edit</span>
                                                 </DropdownMenuItem>
 
-                                                <div className="h-[1px] bg-blue-200/50 mx-1" />
+                                                <div className="h-px bg-blue-200/50 mx-1" />
 
                                                 <DropdownMenuItem className="flex items-center gap-3 px-4 py-3 focus:bg-white/50 cursor-pointer rounded-lg">
                                                     <Lock size={18} />

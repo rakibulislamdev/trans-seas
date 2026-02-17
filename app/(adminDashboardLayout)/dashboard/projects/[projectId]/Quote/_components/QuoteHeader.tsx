@@ -1,4 +1,3 @@
-
 interface QuoteHeaderProps {
     totalQuotes: number;
     reviewCount: number;
@@ -8,9 +7,9 @@ export const QuoteHeader: React.FC<QuoteHeaderProps> = ({ totalQuotes, reviewCou
     return (
         <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-4">
-                <span className="text-gray-500 text-sm">{totalQuotes} Quotes received</span>
+                <span className="text-gray-500 text-sm font-medium">{totalQuotes} Quotes received</span>
                 {reviewCount > 0 && (
-                    <span className="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-semibold rounded">
+                    <span className="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded">
                         {reviewCount} Need Review
                     </span>
                 )}

@@ -7,7 +7,7 @@ import { StatsCards } from '../_components/StatsCards';
 import { DocumentSection } from '../_components/DocumentSection';
 import { ExtractedItemsTable } from '../_components/ExtractedItemsTable';
 import { RFQItemSection } from './rfq/_components/RFQItemSection';
-import ProjectQuotesPage from './Quote/page';
+import ProjectQuotesContainer from './quote/_components/ProjectQuotesContainer';
 
 export default function ProjectDetailsPage({ params }: { params: Promise<{ projectId: string }> }) {
     const resolvedParams = use(params)
@@ -24,7 +24,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ proje
             case 'rfq':
                 return <RFQItemSection projectId={projectId} />
             case 'quotes':
-                return <ProjectQuotesPage />
+                return <ProjectQuotesContainer params={{ projectId }} />
             case 'proposals':
                 return <div className="p-10 text-center text-gray-400 bg-white rounded-2xl border border-dashed border-gray-200">Proposals Management Section</div>;
             default:
