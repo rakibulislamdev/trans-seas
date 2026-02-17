@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { FileText, Package, Send, DollarSign, Files } from 'lucide-react';
 import { ProjectDetailsHeader } from '../_components/ProjectDetailsHeader';
 import { StatsCards } from '../_components/StatsCards';
 import { DocumentSection } from '../_components/DocumentSection';
 import { ExtractedItemsTable } from '../_components/ExtractedItemsTable';
-import { RFQItemSection } from '../_components/RFQItemSection';
+import { RFQItemSection } from './rfq/_components/RFQItemSection';
 
-export default function ProjectDetailsPage() {
+export default function ProjectDetailsPage({ params }: { params: Promise<{ projectId: string }> }) {
+    const resolvedParams = use(params)
+    const projectId = resolvedParams.projectId
     const [activeTab, setActiveTab] = useState('docs');
 
     // Tab content mapping
@@ -19,7 +21,7 @@ export default function ProjectDetailsPage() {
             case 'items':
                 return <ExtractedItemsTable />
             case 'rfq':
-                return <RFQItemSection />
+                return <RFQItemSection projectId={projectId} />
             case 'quotes':
                 return <div className="p-10 text-center text-gray-400 bg-white rounded-2xl border border-dashed border-gray-200">Quotes Management Section</div>;
             case 'proposals':
