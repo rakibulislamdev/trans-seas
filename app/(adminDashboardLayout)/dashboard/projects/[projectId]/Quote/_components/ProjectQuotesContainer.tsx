@@ -77,19 +77,17 @@ export default function ProjectQuotesContainer({ params }: ProjectQuotesContaine
     };
 
     return (
-        <div className="min-h-screen bg-transparent">
+        <div className="min-h-screen">
             <QuoteHeader totalQuotes={totalQuotes} reviewCount={reviewCount} />
 
-            <div className="space-y-4">
-                {quotes.map((quote) => (
-                    <QuoteCard
-                        key={quote.id}
-                        quote={quote}
-                        projectId={projectId}
-                        onStatusChange={(status) => handleStatusUpdate(quote.id, status)}
-                    />
-                ))}
-            </div>
+            {quotes.map((quote) => (
+                <QuoteCard
+                    key={quote.id}
+                    quote={quote}
+                    projectId={projectId}
+                    onStatusChange={(status) => handleStatusUpdate(quote.id, status)}
+                />
+            ))}
         </div>
     );
 }

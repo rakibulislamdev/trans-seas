@@ -50,7 +50,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote, onStatusChange, pro
 
     return (
         <Link href={`/dashboard/projects/${projectId}/quote/${quote.id}`}>
-            <div className="bg-white border border-blue-100 rounded-xl p-5 shadow-[0_10px_20px_rgba(0,113,189,0.05)] transition-all hover:shadow-[0_10px_25px_rgba(0,113,189,0.1)]">
+            <div className="mb-4 border border-blue-100 rounded-xl p-5 shadow-[0_10px_20px_rgba(0,113,189,0.05)] transition-all hover:shadow-[0_10px_25px_rgba(0,113,189,0.1)]">
                 <div className="flex justify-between items-start">
 
                     {/* Left Side: Information */}
